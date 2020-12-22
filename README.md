@@ -99,7 +99,7 @@ Application takes spark master server url and data source (path to the hadoop fi
 ES_SPARK_MASTER=spark://spark-master:7077
 ES_DATA_SOURCE=hdfs://hadoop:9000/data
 ```
-Application container is configured in a way that it waits for a hadoop to be ready before it continues executeion.
+Application container is configured in a way that it waits for a hadoop to be ready before it continues execution.
 Environment variable:
  ```
 ES_HEALTHCHECK_ENDPOINT=http://hadoop:50070/webhdfs/v1/data?op=GETFILESTATUS
@@ -107,7 +107,7 @@ ES_HEALTHCHECK_ENDPOINT=http://hadoop:50070/webhdfs/v1/data?op=GETFILESTATUS
 is url to hdfs rest api which will be available when hadoop is ready. 
 After data is read from hdfs, application is submitted to spark master which distributes jobs among workers.
 
-Tasks (based on sensor captured and user-reported data):
+Tasks (based on sensor-captured and user-reported data):
 - Print time in minutes that users spent with friends relevant to location and time range
 - Print time in minutes that users spent with phone in their hand relevant to location and time range
 - Print minimum, maximum and average value of normalization multiplier relevant to location and time range
