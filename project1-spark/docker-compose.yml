@@ -1,9 +1,9 @@
 version: "3"
 services:
-  es-spark-hadoop-app:
+  es-spark-app:
     build: .
-    image: es-spark-hadoop-app:latest
-    container_name: es-spark-hadoop-app
+    image: es-spark-app:latest
+    container_name: es-spark-app
     environment:
       - ES_SPARK_MASTER=spark://spark-master:7077
       - ES_DATA_SOURCE=hdfs://hadoop:9000/data
