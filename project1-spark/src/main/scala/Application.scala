@@ -11,7 +11,7 @@ object Application {
 
     // Connect to spark master
     val spark = SparkSession.builder
-      .appName("BigData - ExtraSensory")
+      .appName("[Project1] Spark")
       .master(sparkMaster)
       .getOrCreate()
 
