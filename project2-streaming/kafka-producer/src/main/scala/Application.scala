@@ -15,7 +15,7 @@ object Application {
     val kafkaPort = sys.env("ES_KAFKA_PORT")
 
     val serializer = "org.apache.kafka.common.serialization.StringSerializer"
-    val topic = "TEST"
+    val topic = "ExtraSensory"
     val producer = configureProducer(s"$kafkaServer:$kafkaPort", serializer)
 
     val hdfs = FileSystem.get(new URI(hadoopServer), new Configuration())
