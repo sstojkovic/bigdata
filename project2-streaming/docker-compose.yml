@@ -9,6 +9,7 @@ services:
       - ES_FILE_PATH=/data/00EABED2-271D-49D8-B599-1D4A09240601.csv
       - ES_KAFKA_SERVER=http://kafka-server
       - ES_KAFKA_PORT=9092
+      - ES_MILLISECONDS_BETWEEN_MESSAGES=200
       - ES_HEALTHCHECK_ENDPOINT=http://hadoop:50070/webhdfs/v1/data?op=GETFILESTATUS
       - ENABLE_INIT_DAEMON=false
   es-spark-consumer-app:
@@ -19,7 +20,10 @@ services:
       - ES_SPARK_MASTER=spark://spark-master:7077
       - ES_KAFKA_SERVER=kafka-server
       - ES_KAFKA_PORT=9092
+      - ES_MONGODB_CONNECTION_STRING=mongodb://root:example@mongo:27017/?authSource=admin
       - ENABLE_INIT_DAEMON=false
+    depends_on:
+      - mongo-db
   kafka-server:
     image: bitnami/kafka:2.5.0
     container_name: kafka-server
@@ -79,3 +83,22 @@ services:
       - ENABLE_INIT_DAEMON_STEP=false
     mem_limit: 2000m
     cpus: 0.5
+  mongo-db:
+    image: mongo:4.2-bionic
+    container_name: mongo
+    restart: always
+    volumes:
+      - mongo-db-volume:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+  mongo-express:
+    image: mongo-express:0.54.0
+    restart: always
+    ports:
+      - "10000:8081"
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: example
+volumes:
+  mongo-db-volume:

@@ -13,6 +13,7 @@ object Application {
     val filePath = sys.env("ES_FILE_PATH")
     val kafkaServer = sys.env("ES_KAFKA_SERVER")
     val kafkaPort = sys.env("ES_KAFKA_PORT")
+    val delayBetweenSending = sys.env("ES_MILLISECONDS_BETWEEN_MESSAGES").toInt
 
     val serializer = "org.apache.kafka.common.serialization.StringSerializer"
     val topic = "ExtraSensory"
@@ -22,17 +23,18 @@ object Application {
     val path = new Path(filePath)
     val stream = hdfs.open(path)
 
-    val br = new BufferedReader(new InputStreamReader(stream.getWrappedStream()));
+    val br = new BufferedReader(new InputStreamReader(stream.getWrappedStream));
     try {
       var line: String = null
       line = br.readLine()
       while (line != null) {
         producer.send(new ProducerRecord[String, String](topic, line))
         line = br.readLine
+        Thread.sleep(delayBetweenSending)
       }
     } finally {
       stream.close()
-      br.close
+      br.close()
     }
 
     producer.close()
