@@ -111,3 +111,25 @@ Tasks (based on sensor-captured and user-reported data):
 - Print time in minutes that users spent with friends relevant to location and time range
 - Print time in minutes that users spent with phone in their hand relevant to location and time range
 - Print minimum, maximum and average value of normalization multiplier relevant to location and time range
+
+
+## Project2
+
+The second project is about processing events from kafka topic via spark streaming. 
+
+Nodes in the system:
+- kafka producer
+- spark consumer
+- spark master
+- spark worker(s)
+- hadoop
+- mongodb
+
+Kafka producer reads from hdfs and sends row by row (source is a csv file) on topic.
+Spark consumer is creating a streaming context related to kafka producer and listens on given topic.
+Received events are processed and results (for a time window duration) are persisted in mongodb.
+
+Tasks (based on sensor-captured and user-reported data):
+- Store minimum, maximum and average value for watch acceleration properties
+- Store minimum, maximum and average value for maximum audio properties
+- Store 3 most popular locations where users were sitting
