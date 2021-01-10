@@ -1,8 +1,6 @@
 # sbt
 # (may want to keep parts of 'project')
 bin/
-project/
-!project/build.properties
 target/
 build/
 
