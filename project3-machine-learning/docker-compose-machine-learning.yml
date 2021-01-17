@@ -4,8 +4,6 @@ services:
     build: spark-machine-learning
     image: es-machine-learning-app:latest
     container_name: es-machine-learning-app
-    volumes:
-    - ./output:/opt/output/
     environment:
       - ES_SPARK_MASTER=spark://spark-master:7077
       - ES_DATA_SOURCE=hdfs://hadoop:9000/data
