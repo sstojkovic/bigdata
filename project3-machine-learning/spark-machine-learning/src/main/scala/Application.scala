@@ -9,6 +9,7 @@ object Application {
     // Get environment variables for spark and hadoop data source
     val sparkMaster = sys.env("ES_SPARK_MASTER")
     val dataSource = sys.env("ES_DATA_SOURCE")
+    val trainedModelTarget = sys.env("ES_TRAINED_MODEL_TARGET")
 
     val featureLabel = "label:SLEEPING"
 
@@ -39,8 +40,7 @@ object Application {
 
     // Train the model
     val model = randomForestClassifier.fit(trainingData)
-    // TODO: save model
-    // model.write.overwrite.save(<output_dir>)
+    model.write.overwrite.save(trainedModelTarget)
 
     val predictions = model.transform(testData)
 

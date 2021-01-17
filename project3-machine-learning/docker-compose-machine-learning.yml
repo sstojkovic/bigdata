@@ -9,6 +9,7 @@ services:
     environment:
       - ES_SPARK_MASTER=spark://spark-master:7077
       - ES_DATA_SOURCE=hdfs://hadoop:9000/data
+      - ES_TRAINED_MODEL_TARGET=hdfs://hadoop:9000/model
       - ES_HEALTHCHECK_ENDPOINT=http://hadoop:50070/webhdfs/v1/data?op=GETFILESTATUS
       - ENABLE_INIT_DAEMON=false
   hadoop:
