@@ -133,3 +133,39 @@ Tasks (based on sensor-captured and user-reported data):
 - Store minimum, maximum and average value for watch acceleration properties
 - Store minimum, maximum and average value for maximum audio properties
 - Store 3 most popular locations where users were sitting
+
+
+## Project3
+
+Third project introduces machine learning and application of it on the ExtraSensory dataset.
+Project consists of 3 applications and purpose of each of them will be explained.
+
+Nodes in the system (services used by container apps):
+- spark master
+- spark workers
+- kafka server
+- zookeeper server
+- hadoop (hosts dataset and trained model)
+
+### Applications
+
+#### Machine learning 
+Loads dataset from hadoop and performs a model training using RandomForestClassificator. After it finishes, trained model will be saved on a HDFS.
+
+#### Spark Streaming
+First loads trained the model, then subscribes to kafka topic and predicts labels for received events based on the loaded model.
+
+#### Kafka producer
+Periodically sends events which will be processed by streaming application.
+
+### Running
+This one is a bit more complicated than previous projects, so it has separate docker compose configurations and shell scripts.
+
+1. Execute `start-hadoop.sh` and let it run in the background as it will be needed for other applications.
+2. Execute `start-machine-learning.sh`. Wait until `es-spark-machine-learning-app` finishes and terminate process (to release resources and containers).
+3. Execute `start-predictions.sh`. Predictions will be displayed in the console.
+
+
+
+
+

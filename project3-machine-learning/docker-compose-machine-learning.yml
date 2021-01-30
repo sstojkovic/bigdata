@@ -10,16 +10,6 @@ services:
       - ES_TRAINED_MODEL_TARGET=hdfs://hadoop:9000/model
       - ES_HEALTHCHECK_ENDPOINT=http://hadoop:50070/webhdfs/v1/data?op=GETFILESTATUS
       - ENABLE_INIT_DAEMON=false
-  hadoop:
-    build: ./hadoop
-    hostname: hadoop
-    image: hadoop
-    container_name: hadoop
-    ports:
-      - "50070:50070"
-      - "9000:9000"
-    volumes:
-      - ${ES_DATA_DIR}:/var/opt/extrasensory/data
   spark-master:
     image: bde2020/spark-master:3.0.1-hadoop3.2
     container_name: spark-master
@@ -48,3 +38,7 @@ services:
     environment:
       - "SPARK_MASTER=spark://spark-master:7077"
       - ENABLE_INIT_DAEMON_STEP=false
+networks:
+  default:
+    external:
+      name: project3-network
