@@ -6,5 +6,8 @@ if [[ -z "$ES_DATA_DIR" ]]; then
   exit 1
 fi
 
+docker stop es-spark-app spark-master spark-worker-1 spark-worker-2
+docker rm es-spark-app spark-master spark-worker-1 spark-worker-2
+
 docker-compose down
 docker-compose up --build

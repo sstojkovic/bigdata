@@ -6,5 +6,8 @@ if [[ -z "$ES_DATA_DIR" ]]; then
   exit 1
 fi
 
+docker kill es-kafka-producer-app es-spark-consumer-app kafka-server zookeeper-server hadoop spark-master spark-worker-1 spark-worker-2 mongo-db mongo-express
+docker rm es-kafka-producer-app es-spark-consumer-app kafka-server zookeeper-server hadoop spark-master spark-worker-1 spark-worker-2 mongo-db mongo-express
+
 docker-compose down
 docker-compose up --build

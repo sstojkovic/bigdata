@@ -6,5 +6,11 @@ if [[ -z "$ES_DATA_DIR" ]]; then
   exit 1
 fi
 
+docker network rm project3-network
+docker network create project3-network
+
+docker stop hadoop
+docker rm hadoop
+
 docker-compose -f docker-compose-hadoop.yml down
 docker-compose -f docker-compose-hadoop.yml up --build
